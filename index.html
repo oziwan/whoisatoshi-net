@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who is Satoshi Nakamoto? - Investigation & Poll</title>
+    <meta name="description" content="Interactive detective board investigating the identity of Bitcoin creator Satoshi Nakamoto. Join the poll and see live results.">
+    <meta name="theme-color" content="#1a1a2e">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Who is Satoshi Nakamoto?">
+    <meta property="og:description" content="An interactive investigation into Bitcoin's mysterious creator">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://whoisatoshi.net">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Merriweather:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js untuk anket grafikleri -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0f0f1e;
+            --secondary-dark: #1a1a2e;
+            --accent-gold: #d4af37;
+            --accent-red: #e74c3c;
+            --text-light: #ecf0f1;
+            --text-gray: #95a5a6;
+            --border-color: #34495e;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--secondary-dark) 0%, #16213e 100%);
+            border-bottom: 2px solid var(--accent-gold);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.1);
+        }
+
+        .header-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            font-family: 'Courier Prime', monospace;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--accent-red);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 5px;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
+        }
+
+        /* MAIN LAYOUT */
+        .main-container {
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            gap: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            min-height: calc(100vh - 100px);
+        }
+
+        /* SIDEBARS */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-section {
+            background: var(--secondary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            overflow: hidden;
+        }
+
+        .sidebar-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .ad-banner {
+            background: linear-gradient(135deg, #2c2c3e 0%, #16213e 100%);
+            border: 1px dashed var(--border-color);
+            border-radius: 4px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            font-size: 12px;
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .ad-banner:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .ad-banner img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        /* CENTER CONTENT */
+        .content {
+            background: var(--secondary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border-color);
+            background: linear-gradient(90deg, var(--secondary-dark) 0%, #1a1a2e 100%);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-light);
+            background-color: rgba(212, 175, 55, 0.05);
+        }
+
+        .tab-btn.active {
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* DETECTIVE BOARD */
+        .detective-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .candidate-card {
+            background: linear-gradient(135deg, #1e2936 0%, #16213e 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .candidate-card:hover {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #c9a961 100%);
+            padding: 15px;
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        .card-name {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .card-role {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .card-body {
+            padding: 15px;
+            font-size: 13px;
+        }
+
+        .score-badge {
+            display: inline-block;
+            background: var(--accent-red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .evidence-list {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+
+        .evidence-item {
+            margin: 5px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .evidence-item:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        /* POLL SECTION */
+        .poll-container {
+            background: linear-gradient(135deg, #1e2936 0%, #16213e 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .poll-question {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--accent-gold);
+        }
+
+        .poll-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .poll-option {
+            background: var(--secondary-dark);
+            border: 2px solid var(--border-color);
+            padding: 15px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .poll-option:hover {
+            border-color: var(--accent-gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .poll-option.selected {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .poll-button {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #c9a961 100%);
+            border: none;
+            color: var(--primary-dark);
+            padding: 15px 40px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .poll-button:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .poll-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .poll-success {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            padding: 15px 20px;
+            border-radius: 6px;
+            color: white;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* RESULTS CHART */
+        .results-container {
+            background: linear-gradient(135deg, #1e2936 0%, #16213e 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .results-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--accent-gold);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            margin-bottom: 30px;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .results-table thead {
+            background: rgba(212, 175, 55, 0.1);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .results-table th,
+        .results-table td {
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .results-table tr:hover {
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .percentage-bar {
+            background: linear-gradient(90deg, var(--accent-gold) 0%, #c9a961 100%);
+            height: 6px;
+            border-radius: 3px;
+            margin: 5px 0;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--secondary-dark);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
+            margin-top: 50px;
+            text-align: center;
+            color: var(--text-gray);
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* AD SPACE NOTICE */
+        .ad-space-notice {
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px dashed var(--accent-gold);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            color: var(--accent-gold);
+            margin: 30px 0;
+            font-size: 14px;
+        }
+
+        .ad-space-notice strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .ad-space-notice a {
+            color: var(--accent-gold);
+            text-decoration: underline;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .ad-banner {
+                min-height: 150px;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-menu {
+                gap: 15px;
+                font-size: 12px;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab-btn {
+                font-size: 12px;
+                padding: 10px;
+            }
+
+            .tab-content {
+                padding: 15px;
+            }
+
+            .poll-question {
+                font-size: 18px;
+            }
+
+            .detective-board {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Google Ads Responsive */
+        .google-ads-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        /* Loading State */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--accent-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">WHO IS <span>SATOSHI</span>?</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#detective">Detective Board</a></li>
+                    <li><a href="#poll">Vote Now</a></li>
+                    <li><a href="#results">Results</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-container">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">🪙 Crypto Exchanges</div>
+                <a href="https://www.binance.com/en/register?ref=XXXXXX" target="_blank" class="ad-banner">
+                    <div style="text-align: center;">
+                        <strong>BINANCE</strong><br>
+                        Trade Bitcoin & Crypto<br>
+                        (300x600)
+                    </div>
+                </a>
+                <a href="https://www.gate.io/?ref=XXXXXX" target="_blank" class="ad-banner">
+                    <div style="text-align: center;">
+                        <strong>GATE.IO</strong><br>
+                        Global Crypto Exchange<br>
+                        (300x600)
+                    </div>
+                </a>
+                <a href="https://www.bybit.com/?ref=XXXXXX" target="_blank" class="ad-banner">
+                    <div style="text-align: center;">
+                        <strong>BYBIT</strong><br>
+                        Derivatives Trading<br>
+                        (300x600)
+                    </div>
+                </a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">📢 Your Ad Here</div>
+                <div class="ad-space-notice">
+                    <strong>Advertise Your Business</strong>
+                    <p>300x600 Banner Space Available</p>
+                    <a href="mailto:ads@whoisatoshi.net">Contact: ads@whoisatoshi.net</a>
+                </div>
+            </div>
+
+            <!-- Google Ads Space -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Sponsored</div>
+                <div class="google-ads-container">
+                    <!-- Google AdSense kod buraya gelecek -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXX" data-ad-slot="XXXXX" data-ad-format="vertical" data-full-width-responsive="false"></ins>
+                </div>
+            </div>
+        </aside>
+
+        <!-- CENTER CONTENT -->
+        <main class="content">
+            <!-- TABS -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="detective">📋 Detective Board</button>
+                <button class="tab-btn" data-tab="poll">🗳️ Cast Your Vote</button>
+                <button class="tab-btn" data-tab="results">📊 Live Results</button>
+            </div>
+
+            <!-- TAB 1: DETECTIVE BOARD -->
+            <div class="tab-content active" id="detective">
+                <h2 style="color: var(--accent-gold); margin-bottom: 30px; font-size: 28px;">🔍 The Strongest Candidates</h2>
+                <div class="detective-board" id="candidatesGrid">
+                    <!-- Dinamik olarak doldurulacak -->
+                </div>
+            </div>
+
+            <!-- TAB 2: POLL -->
+            <div class="tab-content" id="poll">
+                <div class="poll-container">
+                    <div class="poll-question">🎯 Who do you think Satoshi Nakamoto is?</div>
+                    
+                    <div class="poll-options" id="pollOptions">
+                        <!-- Dinamik olarak doldurulacak -->
+                    </div>
+
+                    <button class="poll-button" id="submitPoll" onclick="submitPoll()">Cast Your Vote</button>
+                    <div id="pollMessage"></div>
+                </div>
+
+                <div class="ad-space-notice">
+                    <strong>💡 Did you know?</strong>
+                    <p>Satoshi Nakamoto's identity remains one of the biggest mysteries in tech history.</p>
+                </div>
+            </div>
+
+            <!-- TAB 3: RESULTS -->
+            <div class="tab-content" id="results">
+                <div class="results-container">
+                    <div class="results-title">📈 Live Voting Results</div>
+                    
+                    <div class="chart-wrapper">
+                        <canvas id="pollChart"></canvas>
+                    </div>
+
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Candidate</th>
+                                <th>Votes</th>
+                                <th>Percentage</th>
+                                <th>Visual</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsTable">
+                            <!-- Dinamik olarak doldurulacak -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">💱 Forex Brokers</div>
+                <a href="https://www.pepperstone.com/?partner=XXXXX" target="_blank" class="ad-banner">
+                    <div style="text-align: center;">
+                        <strong>PEPERSTONE</strong><br>
+                        Forex & CFD Trading<br>
+                        (300x600)
+                    </div>
+                </a>
+                <a href="https://www.octafx.com/?ref=XXXXX" target="_blank" class="ad-banner">
+                    <div style="text-align: center;">
+                        <strong>OCTAFX</strong><br>
+                        Trade Global Markets<br>
+                        (300x600)
+                    </div>
+                </a>
+                <a href="https://www.exness.com/?ref=XXXXX" target="_blank" class="ad-banner">
+                    <div style="text-align: center;">
+                        <strong>EXNESS</strong><br>
+                        Professional Forex<br>
+                        (300x600)
+                    </div>
+                </a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">📢 Your Ad Here</div>
+                <div class="ad-space-notice">
+                    <strong>Advertise Here</strong>
+                    <p>300x600 Banner Space Available</p>
+                    <a href="mailto:ads@whoisatoshi.net">Contact: ads@whoisatoshi.net</a>
+                </div>
+            </div>
+
+            <!-- Google Ads Space -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Sponsored</div>
+                <div class="google-ads-container">
+                    <!-- Google AdSense kod buraya gelecek -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXX" data-ad-slot="XXXXX" data-ad-format="vertical" data-full-width-responsive="false"></ins>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Use</a>
+                <a href="#contact">Contact Us</a>
+                <a href="#sitemap">Sitemap</a>
+            </div>
+            <p>&copy; 2024 whoisatoshi.net | The ongoing investigation into Bitcoin's mysterious creator</p>
+            <p style="font-size: 12px; margin-top: 10px; color: #666;">
+                🌍 Passionate about cryptocurrencies and blockchain history | Not affiliated with Bitcoin or any cryptocurrency exchange
+            </p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Sample Candidates Data
+        const candidates = [
+            {
+                id: 'hal-finney',
+                name: 'Hal Finney',
+                years: '1956 - 2014',
+                role: 'First Bitcoin TX Receiver',
+                score: 9.2,
+                evidence: [
+                    'Closest writing style match (NYT 2014)',
+                    'Neighbor of Dorian Nakamoto',
+                    'PGP Expert & Cypherpunk',
+                    'Active in Bitcoin\'s early days'
+                ],
+                against: [
+                    'ALS patient (diagnosed 2009)',
+                    'Cryopreservation in 2014'
+                ]
+            },
+            {
+                id: 'nick-szabo',
+                name: 'Nick Szabo',
+                years: 'b. 1964',
+                role: 'Bit Gold Inventor',
+                score: 8.8,
+                evidence: [
+                    'Bit Gold (1998) - closest predecessor',
+                    'NYT: Most compelling evidence',
+                    'Expert in cryptography',
+                    'Smart contracts pioneer'
+                ],
+                against: [
+                    'Publicly denied multiple times',
+                    'Blog silence after whitepaper'
+                ]
+            },
+            {
+                id: 'adam-back',
+                name: 'Adam Back',
+                years: 'b. 1965',
+                role: 'Hashcash / PoW Inventor',
+                score: 8.5,
+                evidence: [
+                    'Only name mentioned in whitepaper',
+                    'Created Hashcash (PoW basis)',
+                    'Leading cryptographer',
+                    'Cypherpunk group member'
+                ],
+                against: [
+                    'Transparent career as Blockstream CEO',
+                    'Publicly denied'
+                ]
+            },
+            {
+                id: 'len-sassaman',
+                name: 'Len Sassaman',
+                years: '1980 - 2011',
+                role: 'PGP Developer',
+                score: 7.3,
+                evidence: [
+                    'Died months after Satoshi\'s last message',
+                    'Close Finney collaboration',
+                    'Deep PGP expertise',
+                    'Anonymous comm. research'
+                ],
+                against: [
+                    'Death makes verification impossible',
+                    'Weak direct evidence'
+                ]
+            }
+        ];
+
+        const pollOptions = [
+            'Hal Finney',
+            'Nick Szabo',
+            'Adam Back',
+            'Len Sassaman',
+            'A Group (Collective)',
+            'Still Unknown'
+        ];
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCandidates();
+            loadPollOptions();
+            setupTabs();
+            loadResults();
+        });
+
+        // Load Candidates
+        function loadCandidates() {
+            const grid = document.getElementById('candidatesGrid');
+            grid.innerHTML = candidates.map(c => `
+                <div class="candidate-card">
+                    <div class="card-header">
+                        <div class="card-name">${c.name}</div>
+                        <div class="card-role">${c.role}</div>
+                    </div>
+                    <div class="card-body">
+                        <div style="font-size: 12px; color: var(--text-gray);">${c.years}</div>
+                        <span class="score-badge">Score: ${c.score}/10</span>
+                        <div class="evidence-list">
+                            <strong style="color: #27ae60;">✓ Evidence:</strong>
+                            ${c.evidence.map(e => `<div class="evidence-item">${e}</div>`).join('')}
+                        </div>
+                        <div style="margin-top: 10px; color: var(--accent-red);">
+                            <strong>Against:</strong>
+                            ${c.against.map(a => `<div>• ${a}</div>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load Poll Options
+        function loadPollOptions() {
+            const container = document.getElementById('pollOptions');
+            container.innerHTML = pollOptions.map((opt, i) => `
+                <label class="poll-option" onclick="selectOption(this, '${opt}')">
+                    <input type="radio" name="candidate" value="${opt}" style="margin-right: 10px;">
+                    ${opt}
+                </label>
+            `).join('');
+        }
+
+        // Select Poll Option
+        function selectOption(element, value) {
+            document.querySelectorAll('.poll-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            element.querySelector('input').checked = true;
+        }
+
+        // Submit Poll
+        function submitPoll() {
+            const selected = document.querySelector('.poll-option input:checked');
+            const messageDiv = document.getElementById('pollMessage');
+
+            if (!selected) {
+                messageDiv.innerHTML = '<div style="color: var(--accent-red); padding: 10px; margin-top: 15px;">Please select an option</div>';
+                return;
+            }
+
+            const candidate = selected.value;
+            
+            // Simüle edilmiş API çağrısı
+            fetch('/api/poll/vote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ candidate })
+            })
+            .then(res => res.json())
+            .catch(() => {
+                // Offline mode - localstorage'a kaydet
+                const votes = JSON.parse(localStorage.getItem('votes') || '{}');
+                votes[candidate] = (votes[candidate] || 0) + 1;
+                localStorage.setItem('votes', JSON.stringify(votes));
+                return { success: true };
+            })
+            .then(data => {
+                messageDiv.innerHTML = '<div class="poll-success">✓ Vote submitted! Check results →</div>';
+                document.querySelector('[data-tab="results"]').click();
+            });
+        }
+
+        // Tab Navigation
+        function setupTabs() {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tab = this.getAttribute('data-tab');
+                    
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.querySelectorAll('.tab-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    
+                    document.getElementById(tab).classList.add('active');
+                    this.classList.add('active');
+                });
+            });
+        }
+
+        // Load Results
+        let pollChart = null;
+        function loadResults() {
+            // Örnek sonuçlar
+            const mockResults = {
+                'Hal Finney': 2450,
+                'Nick Szabo': 2100,
+                'Adam Back': 1950,
+                'Len Sassaman': 850,
+                'A Group (Collective)': 620,
+                'Still Unknown': 1030
+            };
+
+            const total = Object.values(mockResults).reduce((a, b) => a + b, 0);
+            
+            // Tablo Güncelle
+            const table = document.getElementById('resultsTable');
+            table.innerHTML = Object.entries(mockResults).map(([name, votes]) => {
+                const percentage = ((votes / total) * 100).toFixed(1);
+                return `
+                    <tr>
+                        <td><strong>${name}</strong></td>
+                        <td>${votes.toLocaleString()}</td>
+                        <td>${percentage}%</td>
+                        <td style="width: 150px;">
+                            <div class="percentage-bar" style="width: ${percentage}%;"></div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            // Chart Güncelle
+            const ctx = document.getElementById('pollChart');
+            if (pollChart) {
+                pollChart.destroy();
+            }
+
+            pollChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(mockResults),
+                    datasets: [{
+                        data: Object.values(mockResults),
+                        backgroundColor: [
+                            '#d4af37',
+                            '#e74c3c',
+                            '#3498db',
+                            '#2ecc71',
+                            '#f39c12',
+                            '#9b59b6'
+                        ],
+                        borderColor: '#1a1a2e',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#ecf0f1',
+                                font: { size: 12 }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-refresh results every 10 seconds
+        setInterval(loadResults, 10000);
+    </script>
+
+    <!-- Google AdSense (replace with your ID) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXX"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
