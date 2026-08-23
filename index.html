@@ -647,13 +647,35 @@ header{background:#fff;border-bottom:5px solid var(--ppt-gold);box-shadow:none;}
 @media(max-width:1200px){.main-container{grid-template-columns:220px minmax(620px,1fr) 220px}.candidate-row{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:900px){.main-container{display:block}.sidebar{position:static;max-height:none}.content{margin:12px}.candidate-row,.elim-grid,.big-metrics{grid-template-columns:1fr}.network-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.net-card{grid-column:auto!important;grid-row:auto!important}.network-center{position:relative;left:auto;top:auto;transform:none;margin:20px auto}.network-lines{display:none}.ppt-section{min-height:auto}.evidence-table{font-size:10px}.evidence-table th,.evidence-table td{padding:7px}}
 
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .header-brand-logo {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex: 0 0 58px;
+            display: block;
+        }
+        @media (max-width: 700px) {
+            .header-brand-logo {
+                width: 46px;
+                height: 46px;
+                flex-basis: 46px;
+            }
+        }
+
 </style>
 </head>
 <body>
     <!-- HEADER -->
     <header>
         <div class="header-container">
-            <div class="logo">WHO IS <span>SATOSHI</span>?</div>
+            <div class="logo header-brand"><img class="header-brand-logo" src="assets/logo/who-is-satoshi-logo.png" alt="Who Is Satoshi logo"><span>WHO IS <span style="color:#b88711;">SATOSHI</span>?</span></div>
             <nav>
                 <ul class="nav-menu">
                     <li><a href="#detective">Detective Board</a></li>
