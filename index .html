@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who is Satoshi Nakamoto? - Investigation & Poll</title>
+    <meta name="description" content="Interactive detective board investigating the identity of Bitcoin creator Satoshi Nakamoto. Join the poll and see live results.">
+    <meta name="theme-color" content="#1a1a2e">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Who is Satoshi Nakamoto?">
+    <meta property="og:description" content="An interactive investigation into Bitcoin's mysterious creator">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://whoisatoshi.net">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Merriweather:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js untuk anket grafikleri -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0f0f1e;
+            --secondary-dark: #1a1a2e;
+            --accent-gold: #d4af37;
+            --accent-red: #e74c3c;
+            --text-light: #ecf0f1;
+            --text-gray: #95a5a6;
+            --border-color: #34495e;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--secondary-dark) 0%, #16213e 100%);
+            border-bottom: 2px solid var(--accent-gold);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.1);
+        }
+
+        .header-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            font-family: 'Courier Prime', monospace;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--accent-red);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 5px;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
+        }
+
+        /* MAIN LAYOUT */
+        .main-container {
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            gap: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            min-height: calc(100vh - 100px);
+        }
+
+        /* SIDEBARS */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-section {
+            background: var(--secondary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            overflow: hidden;
+        }
+
+        .sidebar-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .ad-banner {
+            background: linear-gradient(135deg, #2c2c3e 0%, #16213e 100%);
+            border: 1px dashed var(--border-color);
+            border-radius: 4px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            font-size: 12px;
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .ad-banner:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .ad-banner img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        /* CENTER CONTENT */
+        .content {
+            background: var(--secondary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border-color);
+            background: linear-gradient(90deg, var(--secondary-dark) 0%, #1a1a2e 100%);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-light);
+            background-color: rgba(212, 175, 55, 0.05);
+        }
+
+        .tab-btn.active {
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* DETECTIVE BOARD */
+        .detective-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+
+        .candidate-photo-wrap {
+            display: flex;
+            justify-content: center;
+            margin: -4px 0 14px;
+        }
+        .candidate-photo {
+            width: 118px;
+            height: 118px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-gold);
+            background: #fff;
+            box-shadow: 0 4px 18px rgba(0,0,0,.25);
+        }
+
+        .candidate-card {
+            background: linear-gradient(135deg, #1e2936 0%, #16213e 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .candidate-card:hover {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #c9a961 100%);
+            padding: 15px;
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        .card-name {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .card-role {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .card-body {
+            padding: 15px;
+            font-size: 13px;
+        }
+
+        .score-badge {
+            display: inline-block;
+            background: var(--accent-red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .evidence-list {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+
+        .evidence-item {
+            margin: 5px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .evidence-item:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        /* POLL SECTION */
+        .poll-container {
+            background: linear-gradient(135deg, #1e2936 0%, #16213e 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .poll-question {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--accent-gold);
+        }
+
+        .poll-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .poll-option {
+            background: var(--secondary-dark);
+            border: 2px solid var(--border-color);
+            padding: 15px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .poll-option:hover {
+            border-color: var(--accent-gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .poll-option.selected {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .poll-button {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #c9a961 100%);
+            border: none;
+            color: var(--primary-dark);
+            padding: 15px 40px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .poll-button:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .poll-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .poll-success {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            padding: 15px 20px;
+            border-radius: 6px;
+            color: white;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* RESULTS CHART */
+        .results-container {
+            background: linear-gradient(135deg, #1e2936 0%, #16213e 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .results-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--accent-gold);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            margin-bottom: 30px;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .results-table thead {
+            background: rgba(212, 175, 55, 0.1);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .results-table th,
+        .results-table td {
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .results-table tr:hover {
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .percentage-bar {
+            background: linear-gradient(90deg, var(--accent-gold) 0%, #c9a961 100%);
+            height: 6px;
+            border-radius: 3px;
+            margin: 5px 0;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--secondary-dark);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
+            margin-top: 50px;
+            text-align: center;
+            color: var(--text-gray);
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* AD SPACE NOTICE */
+        .ad-space-notice {
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px dashed var(--accent-gold);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            color: var(--accent-gold);
+            margin: 30px 0;
+            font-size: 14px;
+        }
+
+        .ad-space-notice strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .ad-space-notice a {
+            color: var(--accent-gold);
+            text-decoration: underline;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .ad-banner {
+                min-height: 150px;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-menu {
+                gap: 15px;
+                font-size: 12px;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab-btn {
+                font-size: 12px;
+                padding: 10px;
+            }
+
+            .tab-content {
+                padding: 15px;
+            }
+
+            .poll-question {
+                font-size: 18px;
+            }
+
+            .detective-board {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Google Ads Responsive */
+        .google-ads-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        /* Loading State */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--accent-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .ad-banner {
+            aspect-ratio: 1 / 2;
+            overflow: hidden;
+        }
+        .ad-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+    
+/* ===== PPT-BASED INVESTIGATION DESIGN ===== */
+:root{
+  --ppt-gold:#b48608; --ppt-green:#2f7d32; --ppt-orange:#ef6c00;
+  --ppt-red:#c62828; --ppt-blue:#1769aa; --ppt-purple:#8e24aa;
+  --ppt-gray:#6b6b6b; --ppt-ink:#202020; --ppt-paper:#fff;
+}
+body{background:#f2f2ef;color:var(--ppt-ink);}
+header{background:#fff;border-bottom:5px solid var(--ppt-gold);box-shadow:none;}
+.logo{color:#111}.logo span{color:var(--ppt-gold)}
+.nav-menu a{color:#333}
+.main-container{max-width:1760px;grid-template-columns:300px minmax(720px,1fr) 300px;gap:20px;align-items:start;}
+.sidebar{position:sticky;top:88px;align-self:start;max-height:calc(100vh - 100px);overflow:auto;background:#fff;border:1px solid #ddd;}
+.sidebar-title{background:#f6f6f6;color:#222;border-bottom:3px solid var(--ppt-gold)}
+.content{background:#fff;border:1px solid #ddd;box-shadow:none;padding:0;}
+.tabs{position:sticky;top:72px;z-index:40;background:#fff;border-bottom:1px solid #ddd;padding:12px 16px;margin:0;}
+.tab-btn{background:#fff;color:#333;border:1px solid #cfcfcf}
+.tab-btn.active{background:var(--ppt-gold);color:#fff;border-color:var(--ppt-gold)}
+.tab-content{padding:0;}
+.ppt-scroll{background:#fff;}
+.ppt-section{position:relative;min-height:720px;padding:42px 34px 54px;border-bottom:10px solid var(--section-color,var(--ppt-gold));overflow:hidden;}
+.ppt-section::before{content:"";position:absolute;left:0;right:0;top:0;height:9px;background:var(--section-color,var(--ppt-gold));}
+.ppt-title{font-size:30px;letter-spacing:1.4px;text-transform:uppercase;margin:0 0 28px;color:#222;}
+.ppt-kicker{color:var(--ppt-gold);font-style:italic;font-size:19px;margin:10px 0 22px;}
+.ppt-rule{height:4px;background:var(--ppt-gold);max-width:570px;margin:22px auto;}
+.ppt-hero{text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:720px;}
+.ppt-hero .satoshi-hero{width:270px;height:270px;object-fit:cover;margin-bottom:28px;}
+.ppt-hero h1{font-size:35px;font-weight:500;margin:0 0 18px;}
+.ppt-hero p{max-width:760px;color:#666;font-size:17px}
+.ppt-stats{margin-top:auto;padding-top:80px;color:var(--ppt-gold);font-size:14px}
+.satoshi-top-card{width:260px;margin:0 auto 28px;border:3px solid var(--ppt-gold);border-top-width:8px;background:#fff8dc;padding:14px;display:flex;gap:15px;align-items:center}
+.satoshi-top-card img{width:78px;height:78px;border-radius:50%;object-fit:cover}
+.candidate-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative}
+.ppt-candidate{border:2px solid var(--ppt-green);border-top-width:8px;padding:13px;background:#fff;min-height:420px}
+.ppt-candidate.suspicious{border-color:var(--ppt-orange)}
+.ppt-candidate-head{display:flex;gap:10px;align-items:center;margin-bottom:18px}
+.ppt-candidate-head img{width:86px;height:86px;border-radius:50%;object-fit:cover}
+.ppt-candidate h3{font-size:17px;margin:0 0 5px}.ppt-candidate .role{font-size:12px;color:var(--ppt-gold)}
+.ppt-candidate h4{font-size:13px;margin:15px 0 7px}.ppt-candidate p{font-size:12px;line-height:1.45;margin:5px 0;color:#333}
+.network{position:relative;min-height:680px}
+.network-center{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:260px;border:4px solid var(--ppt-gold);border-top-width:10px;background:#fff8dc;padding:18px;z-index:4;display:flex;gap:15px;align-items:center}
+.network-center img{width:90px;height:90px;border-radius:50%;object-fit:cover}
+.network-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,180px);gap:20px;position:relative;z-index:2}
+.net-card{background:#fff;border:2px solid #777;border-top-width:7px;padding:10px;display:flex;gap:9px;align-items:flex-start;box-shadow:0 1px 3px #bbb}
+.net-card img{width:62px;height:62px;border-radius:50%;object-fit:cover;flex:none}.net-card h4{margin:3px 0;font-size:14px}.net-card p{font-size:10px;margin:4px 0;color:#555}
+.net-card.green{border-color:var(--ppt-green)}.net-card.orange{border-color:var(--ppt-orange)}.net-card.red{border-color:var(--ppt-red)}.net-card.purple{border-color:var(--ppt-purple)}
+.net-card:nth-child(1){grid-column:1;grid-row:1}.net-card:nth-child(2){grid-column:2;grid-row:1}.net-card:nth-child(3){grid-column:3;grid-row:1}.net-card:nth-child(4){grid-column:4;grid-row:1}
+.net-card:nth-child(5){grid-column:1;grid-row:2}.net-card:nth-child(6){grid-column:4;grid-row:2}
+.net-card:nth-child(7){grid-column:1;grid-row:3}.net-card:nth-child(8){grid-column:2;grid-row:3}.net-card:nth-child(9){grid-column:3;grid-row:3}.net-card:nth-child(10){grid-column:4;grid-row:3}
+.network-lines{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.elim-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.craig-panel{border:3px solid var(--ppt-red);min-height:520px;background:#fff7f7}.elim-head{background:var(--ppt-red);color:#fff;padding:14px;text-align:center;font-weight:bold}
+.craig-body{padding:18px}.craig-intro{display:flex;gap:18px}.craig-intro img{width:120px;height:120px;border-radius:50%;object-fit:cover}
+.timeline-row{display:grid;grid-template-columns:90px 1fr;gap:12px;margin:14px 0;font-size:13px}.timeline-year{background:var(--ppt-red);color:#fff;text-align:center;padding:8px;font-weight:bold}
+.other-elim{border:1px solid #ccc}.other-elim .elim-head{background:#666}.elim-person{display:flex;gap:10px;border-bottom:1px solid #ddd;padding:10px}.elim-person img{width:50px;height:50px;border-radius:50%;object-fit:cover}.elim-person h4{margin:0 0 3px;font-size:13px}.elim-person p{margin:0;font-size:10px;color:#555}
+.evidence-table{width:100%;border-collapse:collapse;font-size:13px}.evidence-table th{background:var(--ppt-blue);color:#fff;padding:12px}.evidence-table td{border:1px solid #e3e3e3;padding:13px}.evidence-table tr:nth-child(even){background:#fafafa}.stars{color:var(--ppt-gold);letter-spacing:2px;white-space:nowrap}.status{color:#fff;font-weight:bold;text-align:center}.strong{background:var(--ppt-green)}.sus{background:var(--ppt-orange)}.weak{background:var(--ppt-blue)}.eliminated{background:var(--ppt-red)}
+.final-section{text-align:center;display:flex;flex-direction:column;justify-content:center;min-height:680px}.final-section h2{font-size:42px;letter-spacing:2px}.big-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin:45px 0}.metric strong{display:block;font-size:45px;color:var(--ppt-gold)}.metric span{color:#666}.final-copy{max-width:800px;margin:auto;line-height:1.7}.quote{margin:35px auto 0;padding:22px;border-top:3px solid var(--ppt-gold);max-width:760px;font-style:italic}
+.ad-banner{background:#fff;color:#222;border:1px solid #ddd}.ad-banner div{color:#222}
+.contact-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;padding:20px}.contact-modal.open{display:flex}.contact-card{width:min(560px,95vw);background:#fff;padding:28px;border-top:8px solid var(--ppt-gold);position:relative}.contact-card h3{margin-top:0}.contact-card input,.contact-card select,.contact-card textarea{width:100%;box-sizing:border-box;margin:7px 0 14px;padding:11px;border:1px solid #bbb}.contact-card textarea{min-height:120px}.contact-card button{background:var(--ppt-gold);color:#fff;border:0;padding:12px 18px;cursor:pointer}.modal-close{position:absolute;right:15px;top:10px;font-size:26px;cursor:pointer}
+@media(max-width:1200px){.main-container{grid-template-columns:220px minmax(620px,1fr) 220px}.candidate-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.main-container{display:block}.sidebar{position:static;max-height:none}.content{margin:12px}.candidate-row,.elim-grid,.big-metrics{grid-template-columns:1fr}.network-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.net-card{grid-column:auto!important;grid-row:auto!important}.network-center{position:relative;left:auto;top:auto;transform:none;margin:20px auto}.network-lines{display:none}.ppt-section{min-height:auto}.evidence-table{font-size:10px}.evidence-table th,.evidence-table td{padding:7px}}
+
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .header-brand-logo {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex: 0 0 58px;
+            display: block;
+        }
+        @media (max-width: 700px) {
+            .header-brand-logo {
+                width: 46px;
+                height: 46px;
+                flex-basis: 46px;
+            }
+        }
+
+</style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo header-brand"><img class="header-brand-logo" src="assets/logo/who-is-satoshi-logo.png" alt="Who Is Satoshi logo"><span>WHO IS <span style="color:#b88711;">SATOSHI</span>?</span></div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#detective">Detective Board</a></li>
+                    <li><a href="#poll">Vote Now</a></li>
+                    <li><a href="#results">Results</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-container">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">🪙 Crypto Exchanges</div>
+                <a href="https://www.binance.com/en/register?ref=XXXXXX" target="_blank" class="ad-banner">
+                    <div style="text-align: center;">
+                        <strong>BINANCE</strong><br>
+                        Trade Bitcoin & Crypto<br>
+                        (300x600)
+                    </div>
+                </a>
+                <a href="https://www.gate.io/?ref=XXXXXX" target="_blank" class="ad-banner">
+                    <div style="text-align: center;">
+                        <strong>GATE.IO</strong><br>
+                        Global Crypto Exchange<br>
+                        (300x600)
+                    </div>
+                </a>
+                <a href="https://www.bybit.com/?ref=XXXXXX" target="_blank" class="ad-banner">
+                    <div style="text-align: center;">
+                        <strong>BYBIT</strong><br>
+                        Derivatives Trading<br>
+                        (300x600)
+                    </div>
+                </a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">📢 Your Ad Here</div>
+                <a href="#" onclick="openAdModal(event)" class="ad-banner advertise-placeholder" aria-label="Advertise in the crypto sidebar">
+                    <img src="assets/ads/advertise-crypto-300x600.png" alt="Advertise here - Crypto audience - 300 by 600">
+                </a>
+            </div>
+
+            <!-- Google Ads Space -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Sponsored</div>
+                <div class="google-ads-container">
+                    <!-- Google AdSense kod buraya gelecek -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXX" data-ad-slot="XXXXX" data-ad-format="vertical" data-full-width-responsive="false"></ins>
+                </div>
+            </div>
+        </aside>
+
+        <!-- CENTER CONTENT -->
+        <main class="content">
+            <!-- TABS -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="detective">📋 Detective Board</button>
+                <button class="tab-btn" data-tab="poll">🗳️ Cast Your Vote</button>
+                <button class="tab-btn" data-tab="results">📊 Live Results</button>
+            </div>
+
+            <!-- TAB 1: DETECTIVE BOARD -->
+            
+            <div class="tab-content active" id="detective">
+              <div class="ppt-scroll">
+
+                <!-- PPT PAGE 1 -->
+                <section class="ppt-section ppt-hero" style="--section-color:var(--ppt-gold)">
+                  <img class="satoshi-hero" src="assets/images/satoshi-statue.webp" alt="Satoshi Nakamoto statue">
+                  <h1>WHO IS THIS SATOSHI NAKAMOTO?</h1>
+                  <div class="ppt-kicker">Identity of Bitcoin Creator – Investigation</div>
+                  <div class="ppt-rule"></div>
+                  <p>The few usual suspects in the mystery that has remained unsolved since 2008, along with countless clues.</p>
+                  <div class="ppt-stats">1.1 Million BTC &nbsp; | &nbsp; It didn't move at all &nbsp; | &nbsp; Last message: April 2011</div>
+                </section>
+
+                <!-- PPT PAGE 2 -->
+                <section class="ppt-section" style="--section-color:var(--ppt-green)">
+                  <h2 class="ppt-title">The Strongest Candidates</h2>
+                  <div class="satoshi-top-card">
+                    <img src="assets/images/satoshi-statue-square.webp" alt="">
+                    <div><strong>SATOSHI NAKAMOTO</strong><br><small>Bitcoin Creator<br>2008–2011</small></div>
+                  </div>
+                  <div class="candidate-row">
+                    <article class="ppt-candidate">
+                      <div class="ppt-candidate-head"><img src="assets/images/hal-finney-square.webp"><div><h3>HAL FINNEY</h3><div class="role">It didn't move at all</div><small>1956–2014</small></div></div>
+                      <h4>Strong Evidence:</h4><p>Satoshi conducted the first Bitcoin transaction (3 January 2009).</p><p>The closest match in the writing style analysis. His neighbor's name is Dorian Nakamoto.</p><p>Active member of the cypherpunk community; PGP expert.</p>
+                      <h4>Counter Argument:</h4><p>An ALS patient, diagnosed in 2009, underwent cryopreservation in 2014.</p>
+                    </article>
+                    <article class="ppt-candidate">
+                      <div class="ppt-candidate-head"><img src="assets/images/nick-szabo-square.webp"><div><h3>NICK SZABO</h3><div class="role">Bit Gold + Smart Contract</div><small>b. 1964</small></div></div>
+                      <h4>Strong Evidence:</h4><p>Bit Gold (1998), Bitcoin's closest technical predecessor.</p><p>NYT: the most compelling evidence points to Szabo. The blog's silence following the whitepaper publication is noteworthy.</p><p>Smart contracts are based on the Bitcoin protocol.</p>
+                      <h4>Counter Argument:</h4><p>He rejected the possibility of being Satoshi.</p>
+                    </article>
+                    <article class="ppt-candidate">
+                      <div class="ppt-candidate-head"><img src="assets/images/adam-back-square.webp"><div><h3>ADAM BACK</h3><div class="role">Hashcash / PoW inventor</div><small>b. 1965</small></div></div>
+                      <h4>Strong Evidence:</h4><p>The only name Satoshi mentioned in the whitepaper.</p><p>Hashcash is the basis of Bitcoin's PoW mechanism. Leading expert in cryptography and active in Bitcoin's early development.</p>
+                      <h4>Counter Argument:</h4><p>He has an unassuming, transparent career as CEO of Blockstream.</p>
+                    </article>
+                    <article class="ppt-candidate suspicious">
+                      <div class="ppt-candidate-head"><img src="assets/images/len-sassaman-square.webp"><div><h3>LEN SASSAMAN</h3><div class="role">PGP Developer</div><small>1980–2011</small></div></div>
+                      <h4>Suspicious Evidence:</h4><p>Satoshi disappeared months after his last forum message.</p><p>Close Cypherpunk collaboration with Hal Finney. Deep expertise in PGP and cryptography; academic work on anonymous online communication.</p>
+                      <h4>Counter-argument:</h4><p>Verification is impossible due to his death; the direct evidence is weak.</p>
+                    </article>
+                  </div>
+                </section>
+
+                <!-- PPT PAGE 3 -->
+                <section class="ppt-section" style="--section-color:var(--ppt-orange)">
+                  <h2 class="ppt-title">Network of Connections and Suspects</h2>
+                  <div class="network">
+                    <svg class="network-lines" viewBox="0 0 1000 680" preserveAspectRatio="none">
+                      <g stroke-width="1.5" opacity=".35" fill="none">
+                        <line x1="500" y1="315" x2="120" y2="90" stroke="#c62828"/><line x1="500" y1="315" x2="370" y2="90" stroke="#2f7d32"/>
+                        <line x1="500" y1="315" x2="630" y2="90" stroke="#ef6c00"/><line x1="500" y1="315" x2="880" y2="90" stroke="#777"/>
+                        <line x1="500" y1="315" x2="120" y2="315" stroke="#2f7d32"/><line x1="500" y1="315" x2="880" y2="315" stroke="#777"/>
+                        <line x1="500" y1="315" x2="120" y2="570" stroke="#2f7d32"/><line x1="500" y1="315" x2="370" y2="570" stroke="#ef6c00"/>
+                        <line x1="500" y1="315" x2="630" y2="570" stroke="#8e24aa"/><line x1="500" y1="315" x2="880" y2="570" stroke="#8e24aa"/>
+                      </g>
+                    </svg>
+                    <div class="network-grid">
+                      <div class="net-card red"><img src="assets/images/craig-wright-square.webp"><div><h4>Craig Wright</h4><p>Claim rejected by the court; documents found to be fake.</p></div></div>
+                      <div class="net-card green"><img src="assets/images/adam-back-square.webp"><div><h4>Adam Back</h4><p>Hashcash / PoW. Mentioned in the whitepaper.</p></div></div>
+                      <div class="net-card orange"><img src="assets/images/gavin-andresen-square.webp"><div><h4>Gavin Andresen</h4><p>Code heir; took over the project from Satoshi.</p></div></div>
+                      <div class="net-card"><img src="assets/images/peter-todd-square.webp"><div><h4>Peter Todd</h4><p>Bitcoin Core developer; HBO 2024 suggestion, denied.</p></div></div>
+                      <div class="net-card green"><img src="assets/images/hal-finney-square.webp"><div><h4>Hal Finney</h4><p>First Bitcoin TX buyer; closest writing-style match.</p></div></div>
+                      <div class="net-card"><img src="assets/images/wei-dai-square.webp"><div><h4>Wei Dai</h4><p>b-money inventor; quoted in the Bitcoin whitepaper.</p></div></div>
+                      <div class="net-card green"><img src="assets/images/nick-szabo-square.webp"><div><h4>Nick Szabo</h4><p>Bit Gold predecessor; language analysis aligns.</p></div></div>
+                      <div class="net-card orange"><img src="assets/images/len-sassaman-square.webp"><div><h4>Len Sassaman</h4><p>PGP developer; worked closely with Finney.</p></div></div>
+                      <div class="net-card purple"><img src="assets/images/david-kleiman-square.webp"><div><h4>David Kleiman</h4><p>Craig Wright partner claim; died in 2013.</p></div></div>
+                      <div class="net-card purple"><img src="assets/images/cypherpunk-group-square.webp"><div><h4>Cypherpunk Group</h4><p>Collective identity theory.</p></div></div>
+                    </div>
+                    <div class="network-center"><img src="assets/images/satoshi-statue-square.webp"><div><strong>SATOSHI<br>NAKAMOTO</strong><br><small>Bitcoin Creator · 2008–2011</small></div></div>
+                  </div>
+                </section>
+
+                <!-- PPT PAGE 4 -->
+                <section class="ppt-section" style="--section-color:var(--ppt-red)">
+                  <h2 class="ppt-title">Eliminated</h2>
+                  <div class="elim-grid">
+                    <div class="craig-panel">
+                      <div class="elim-head">CRAIG STEVEN WRIGHT — ELIMINATED</div>
+                      <div class="craig-body">
+                        <div class="craig-intro"><img src="assets/images/craig-wright-square.webp"><p>Wired and Gizmodo identified him as Satoshi in 2015. He later publicly claimed to be Satoshi.</p></div>
+                        <div class="timeline-row"><div class="timeline-year">2015</div><div>Wired and Gizmodo identified him as Satoshi.</div></div>
+                        <div class="timeline-row"><div class="timeline-year">2016</div><div>He said “I am Satoshi” on the BBC and then left.</div></div>
+                        <div class="timeline-row"><div class="timeline-year">2019</div><div>He divided the ecosystem by creating Bitcoin SV.</div></div>
+                        <div class="timeline-row"><div class="timeline-year">2020+</div><div>Repeatedly delayed or evaded obtaining the cryptographic signature that would prove the claim; filed numerous lawsuits against critics.</div></div>
+                        <div class="timeline-row"><div class="timeline-year">Mar 2024</div><div>UK court: documents were fake; judge found that he lied repeatedly and extensively.</div></div>
+                      </div>
+                    </div>
+                    <div class="other-elim">
+                      <div class="elim-head">OTHER ELIMINATED CANDIDATES</div>
+                      <div class="elim-person"><img src="assets/images/dorian-nakamoto-square.webp"><div><h4>Dorian Nakamoto</h4><p>Newsweek's 2014 report brought his name forward. He vehemently denied it and was not involved with Bitcoin.</p></div></div>
+                      <div class="elim-person"><img src="assets/images/elon-musk-square.webp"><div><h4>Elon Musk</h4><p>A former SpaceX employee suggested Musk in 2017; Musk dismissed the allegation.</p></div></div>
+                      <div class="elim-person"><img src="assets/images/vili-lehdonvirta-square.webp"><div><h4>Vili Lehdonvirta</h4><p>New Scientist identified the economist in 2011; he denied involvement.</p></div></div>
+                      <div class="elim-person"><img src="assets/images/paul-le-roux-square.webp"><div><h4>Paul Le Roux</h4><p>The theory remained speculative; no direct technical connection was established.</p></div></div>
+                      <div class="elim-person"><img src="assets/images/david-chaum-square.webp"><div><h4>David Chaum</h4><p>The e-cash inventor inspired Bitcoin, but his openly academic persona does not fit the Satoshi profile.</p></div></div>
+                    </div>
+                  </div>
+                </section>
+
+                <!-- PPT PAGE 5 -->
+                <section class="ppt-section" style="--section-color:var(--ppt-blue)">
+                  <h2 class="ppt-title">Evidence Analysis – How Close Are the Individuals to Being Satoshi Nakamoto?</h2>
+                  <div style="overflow-x:auto">
+                  <table class="evidence-table">
+                    <thead><tr><th>Candidate</th><th>Technical Competence</th><th>Font Style</th><th>Time Overlap</th><th>Motivation</th><th>Denial</th><th>Situation</th></tr></thead>
+                    <tbody>
+                      <tr><td>Hal Finney</td><td class="stars">★★★★★</td><td class="stars">★★★★★</td><td class="stars">★★★★★</td><td class="stars">★★★★☆</td><td>Yes</td><td class="status strong">STRONG</td></tr>
+                      <tr><td>Nick Szabo</td><td class="stars">★★★★★</td><td class="stars">★★★★☆</td><td class="stars">★★★★★</td><td class="stars">★★★★★</td><td>Yes</td><td class="status strong">STRONG</td></tr>
+                      <tr><td>Adam Back</td><td class="stars">★★★★★</td><td class="stars">★★★☆☆</td><td class="stars">★★★★☆</td><td class="stars">★★★★☆</td><td>Yes</td><td class="status strong">STRONG</td></tr>
+                      <tr><td>Len Sassaman</td><td class="stars">★★★★☆</td><td class="stars">★★★☆☆</td><td class="stars">★★★★★</td><td class="stars">★★★☆☆</td><td>Death</td><td class="status sus">SUSPICIOUS</td></tr>
+                      <tr><td>Gavin Andresen</td><td class="stars">★★★★☆</td><td class="stars">★★★☆☆</td><td class="stars">★★★★☆</td><td class="stars">★★★☆☆</td><td>Yes</td><td class="status sus">SUSPICIOUS</td></tr>
+                      <tr><td>David Kleiman</td><td class="stars">★★★★☆</td><td class="stars">★★☆☆☆</td><td class="stars">★★★★☆</td><td class="stars">★★★☆☆</td><td>Death</td><td class="status sus">SUSPICIOUS</td></tr>
+                      <tr><td>Peter Todd</td><td class="stars">★★★★☆</td><td class="stars">★★★☆☆</td><td class="stars">★★★☆☆</td><td class="stars">★★★☆☆</td><td>Yes</td><td class="status weak">WEAK</td></tr>
+                      <tr><td>Wei Dai</td><td class="stars">★★★★☆</td><td class="stars">★★☆☆☆</td><td class="stars">★★★★☆</td><td class="stars">★★★★☆</td><td>--</td><td class="status weak">WEAK</td></tr>
+                      <tr><td>Craig Wright</td><td class="stars">★★★☆☆</td><td class="stars">★★☆☆☆</td><td class="stars">★★★☆☆</td><td class="stars">★★☆☆☆</td><td>No</td><td class="status eliminated">ELIMINATED</td></tr>
+                      <tr><td>Dorian Nakamoto</td><td class="stars">★☆☆☆☆</td><td class="stars">★☆☆☆☆</td><td class="stars">★☆☆☆☆</td><td class="stars">★☆☆☆☆</td><td>Yes</td><td class="status eliminated">ELIMINATED</td></tr>
+                    </tbody>
+                  </table></div>
+                </section>
+
+                <!-- PPT PAGE 6 -->
+                <section class="ppt-section final-section" style="--section-color:var(--ppt-gold)">
+                  <h2>THE MYSTERY REMAINS UNSOLVED.</h2>
+                  <div class="big-metrics">
+                    <div class="metric"><strong>1.1M</strong><span>BTC — didn't move at all</span></div>
+                    <div class="metric"><strong>2011</strong><span>Year of the last message</span></div>
+                    <div class="metric"><strong>15+</strong><span>Suspects under investigation</span></div>
+                    <div class="metric"><strong>0</strong><span>Conclusive evidence</span></div>
+                  </div>
+                  <div class="final-copy">
+                    <p>Hal Finney, Nick Szabo, and Adam Back remain the three names with the strongest technical and contextual evidence.</p>
+                    <p>Craig Wright's claim was definitively rejected by the UK High Court in 2024. The theory that Satoshi might have been part of a group was never completely ruled out.</p>
+                    <p>The fact that 1.1 million BTC haven't moved at all suggests that the owner may have passed away or lost access to them.</p>
+                  </div>
+                  <div class="quote">“If you don't trust me or understand me, I apologize. I don't have time to convince you.”<br><strong>— Satoshi Nakamoto</strong></div>
+                </section>
+              </div>
+            </div>
+
+            <!-- TAB 2: POLL -->
+            <div class="tab-content" id="poll">
+                <div class="poll-container">
+                    <div class="poll-question">🎯 Who do you think Satoshi Nakamoto is?</div>
+                    
+                    <div class="poll-options" id="pollOptions">
+                        <!-- Dinamik olarak doldurulacak -->
+                    </div>
+
+                    <button class="poll-button" id="submitPoll" onclick="submitPoll()">Cast Your Vote</button>
+                    <div id="pollMessage"></div>
+                </div>
+
+                <div class="ad-space-notice">
+                    <strong>💡 Did you know?</strong>
+                    <p>Satoshi Nakamoto's identity remains one of the biggest mysteries in tech history.</p>
+                </div>
+            </div>
+
+            <!-- TAB 3: RESULTS -->
+            <div class="tab-content" id="results">
+                <div class="results-container">
+                    <div class="results-title">📈 Live Voting Results</div>
+                    
+                    <div class="chart-wrapper">
+                        <canvas id="pollChart"></canvas>
+                    </div>
+
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Candidate</th>
+                                <th>Votes</th>
+                                <th>Percentage</th>
+                                <th>Visual</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsTable">
+                            <!-- Dinamik olarak doldurulacak -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">💱 Forex Brokers</div>
+                <a href="https://www.pepperstone.com/?partner=XXXXX" target="_blank" class="ad-banner">
+                    <div style="text-align: center;">
+                        <strong>PEPERSTONE</strong><br>
+                        Forex & CFD Trading<br>
+                        (300x600)
+                    </div>
+                </a>
+                <a href="https://www.octafx.com/?ref=XXXXX" target="_blank" class="ad-banner">
+                    <div style="text-align: center;">
+                        <strong>OCTAFX</strong><br>
+                        Trade Global Markets<br>
+                        (300x600)
+                    </div>
+                </a>
+                <a href="https://www.exness.com/?ref=XXXXX" target="_blank" class="ad-banner">
+                    <div style="text-align: center;">
+                        <strong>EXNESS</strong><br>
+                        Professional Forex<br>
+                        (300x600)
+                    </div>
+                </a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">📢 Your Ad Here</div>
+                <a href="#" onclick="openAdModal(event)" class="ad-banner advertise-placeholder" aria-label="Advertise in the forex sidebar">
+                    <img src="assets/ads/advertise-forex-300x600.png" alt="Advertise here - Forex audience - 300 by 600">
+                </a>
+            </div>
+
+            <!-- Google Ads Space -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Sponsored</div>
+                <div class="google-ads-container">
+                    <!-- Google AdSense kod buraya gelecek -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXX" data-ad-slot="XXXXX" data-ad-format="vertical" data-full-width-responsive="false"></ins>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Use</a>
+                <a href="#contact">Contact Us</a>
+                <a href="#sitemap">Sitemap</a>
+            </div>
+            <p>&copy; 2024 whoisatoshi.net | The ongoing investigation into Bitcoin's mysterious creator</p>
+            <p style="font-size: 12px; margin-top: 10px; color: #666;">
+                🌍 Passionate about cryptocurrencies and blockchain history | Not affiliated with Bitcoin or any cryptocurrency exchange
+            </p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Sample Candidates Data
+        const candidates = [
+            {
+                id: 'hal-finney',
+                image: 'assets/images/hal-finney-square.webp',
+                name: 'Hal Finney',
+                years: '1956 - 2014',
+                role: 'First Bitcoin TX Receiver',
+                score: 9.2,
+                evidence: [
+                    'Closest writing style match (NYT 2014)',
+                    'Neighbor of Dorian Nakamoto',
+                    'PGP Expert & Cypherpunk',
+                    'Active in Bitcoin\'s early days'
+                ],
+                against: [
+                    'ALS patient (diagnosed 2009)',
+                    'Cryopreservation in 2014'
+                ]
+            },
+            {
+                id: 'nick-szabo',
+                image: 'assets/images/nick-szabo-square.webp',
+                name: 'Nick Szabo',
+                years: 'b. 1964',
+                role: 'Bit Gold Inventor',
+                score: 8.8,
+                evidence: [
+                    'Bit Gold (1998) - closest predecessor',
+                    'NYT: Most compelling evidence',
+                    'Expert in cryptography',
+                    'Smart contracts pioneer'
+                ],
+                against: [
+                    'Publicly denied multiple times',
+                    'Blog silence after whitepaper'
+                ]
+            },
+            {
+                id: 'adam-back',
+                image: 'assets/images/adam-back-square.webp',
+                name: 'Adam Back',
+                years: 'b. 1965',
+                role: 'Hashcash / PoW Inventor',
+                score: 8.5,
+                evidence: [
+                    'Only name mentioned in whitepaper',
+                    'Created Hashcash (PoW basis)',
+                    'Leading cryptographer',
+                    'Cypherpunk group member'
+                ],
+                against: [
+                    'Transparent career as Blockstream CEO',
+                    'Publicly denied'
+                ]
+            },
+            {
+                id: 'len-sassaman',
+                image: 'assets/images/len-sassaman-square.webp',
+                name: 'Len Sassaman',
+                years: '1980 - 2011',
+                role: 'PGP Developer',
+                score: 7.3,
+                evidence: [
+                    'Died months after Satoshi\'s last message',
+                    'Close Finney collaboration',
+                    'Deep PGP expertise',
+                    'Anonymous comm. research'
+                ],
+                against: [
+                    'Death makes verification impossible',
+                    'Weak direct evidence'
+                ]
+            }
+        ];
+
+        const pollOptions = [
+            'Hal Finney',
+            'Nick Szabo',
+            'Adam Back',
+            'Len Sassaman',
+            'A Group (Collective)',
+            'Still Unknown'
+        ];
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCandidates();
+            loadPollOptions();
+            setupTabs();
+            loadResults();
+        });
+
+        // Load Candidates
+        function loadCandidates() {
+            const grid = document.getElementById('candidatesGrid');
+            grid.innerHTML = candidates.map(c => `
+                <div class="candidate-card">
+                    <div class="candidate-photo-wrap">
+                        <img class="candidate-photo" src="${c.image}" alt="${c.name}" loading="lazy">
+                    </div>
+                    <div class="card-header">
+                        <div class="card-name">${c.name}</div>
+                        <div class="card-role">${c.role}</div>
+                    </div>
+                    <div class="card-body">
+                        <div style="font-size: 12px; color: var(--text-gray);">${c.years}</div>
+                        <span class="score-badge">Score: ${c.score}/10</span>
+                        <div class="evidence-list">
+                            <strong style="color: #27ae60;">✓ Evidence:</strong>
+                            ${c.evidence.map(e => `<div class="evidence-item">${e}</div>`).join('')}
+                        </div>
+                        <div style="margin-top: 10px; color: var(--accent-red);">
+                            <strong>Against:</strong>
+                            ${c.against.map(a => `<div>• ${a}</div>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load Poll Options
+        function loadPollOptions() {
+            const container = document.getElementById('pollOptions');
+            container.innerHTML = pollOptions.map((opt, i) => `
+                <label class="poll-option" onclick="selectOption(this, '${opt}')">
+                    <input type="radio" name="candidate" value="${opt}" style="margin-right: 10px;">
+                    ${opt}
+                </label>
+            `).join('');
+        }
+
+        // Select Poll Option
+        function selectOption(element, value) {
+            document.querySelectorAll('.poll-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            element.querySelector('input').checked = true;
+        }
+
+        // Submit Poll
+        function submitPoll() {
+            const selected = document.querySelector('.poll-option input:checked');
+            const messageDiv = document.getElementById('pollMessage');
+
+            if (!selected) {
+                messageDiv.innerHTML = '<div style="color: var(--accent-red); padding: 10px; margin-top: 15px;">Please select an option</div>';
+                return;
+            }
+
+            const candidate = selected.value;
+            
+            // Simüle edilmiş API çağrısı
+            fetch('/api/poll/vote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ candidate })
+            })
+            .then(res => res.json())
+            .catch(() => {
+                // Offline mode - localstorage'a kaydet
+                const votes = JSON.parse(localStorage.getItem('votes') || '{}');
+                votes[candidate] = (votes[candidate] || 0) + 1;
+                localStorage.setItem('votes', JSON.stringify(votes));
+                return { success: true };
+            })
+            .then(data => {
+                messageDiv.innerHTML = '<div class="poll-success">✓ Vote submitted! Check results →</div>';
+                document.querySelector('[data-tab="results"]').click();
+            });
+        }
+
+        // Tab Navigation
+        function setupTabs() {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tab = this.getAttribute('data-tab');
+                    
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.querySelectorAll('.tab-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    
+                    document.getElementById(tab).classList.add('active');
+                    this.classList.add('active');
+                });
+            });
+        }
+
+        // Load Results
+        let pollChart = null;
+        function loadResults() {
+            // Örnek sonuçlar
+            const mockResults = {
+                'Hal Finney': 2450,
+                'Nick Szabo': 2100,
+                'Adam Back': 1950,
+                'Len Sassaman': 850,
+                'A Group (Collective)': 620,
+                'Still Unknown': 1030
+            };
+
+            const total = Object.values(mockResults).reduce((a, b) => a + b, 0);
+            
+            // Tablo Güncelle
+            const table = document.getElementById('resultsTable');
+            table.innerHTML = Object.entries(mockResults).map(([name, votes]) => {
+                const percentage = ((votes / total) * 100).toFixed(1);
+                return `
+                    <tr>
+                        <td><strong>${name}</strong></td>
+                        <td>${votes.toLocaleString()}</td>
+                        <td>${percentage}%</td>
+                        <td style="width: 150px;">
+                            <div class="percentage-bar" style="width: ${percentage}%;"></div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            // Chart Güncelle
+            const ctx = document.getElementById('pollChart');
+            if (pollChart) {
+                pollChart.destroy();
+            }
+
+            pollChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(mockResults),
+                    datasets: [{
+                        data: Object.values(mockResults),
+                        backgroundColor: [
+                            '#d4af37',
+                            '#e74c3c',
+                            '#3498db',
+                            '#2ecc71',
+                            '#f39c12',
+                            '#9b59b6'
+                        ],
+                        borderColor: '#1a1a2e',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#ecf0f1',
+                                font: { size: 12 }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-refresh results every 10 seconds
+        setInterval(loadResults, 10000);
+    </script>
+
+    <!-- Google AdSense (replace with your ID) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXX"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<div class="contact-modal" id="adContactModal" aria-hidden="true">
+  <div class="contact-card">
+    <span class="modal-close" onclick="closeAdModal()">&times;</span>
+    <h3>Advertise on WhoIsSatoshi.net</h3>
+    <p>Send an advertising inquiry for a Crypto or Forex sidebar placement.</p>
+    <form onsubmit="submitAdInquiry(event)">
+      <input required name="name" placeholder="Name / Company">
+      <input required type="email" name="email" placeholder="Email">
+      <input name="website" placeholder="Website">
+      <select name="placement"><option>Crypto sidebar</option><option>Forex sidebar</option><option>Either / both</option></select>
+      <textarea required name="message" placeholder="Message"></textarea>
+      <button type="submit">Send Advertising Inquiry</button>
+    </form>
+  </div>
+</div>
+
+<script>
+function openAdModal(e){ if(e)e.preventDefault(); document.getElementById('adContactModal').classList.add('open'); }
+function closeAdModal(){ document.getElementById('adContactModal').classList.remove('open'); }
+function submitAdInquiry(e){
+  e.preventDefault();
+  const f=e.target, d=new FormData(f);
+  const subject=encodeURIComponent('Advertising inquiry - '+d.get('placement'));
+  const body=encodeURIComponent('Name / Company: '+d.get('name')+'\nEmail: '+d.get('email')+'\nWebsite: '+d.get('website')+'\nPlacement: '+d.get('placement')+'\n\n'+d.get('message'));
+  window.location.href='mailto:ads@whoisatoshi.net?subject='+subject+'&body='+body;
+}
+document.getElementById('adContactModal').addEventListener('click',e=>{if(e.target.id==='adContactModal')closeAdModal()});
+</script>
+</body>
+</html>
