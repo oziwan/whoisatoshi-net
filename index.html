@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6391217209789426" crossorigin="anonymous"></script>  <meta charset="UTF-8">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Who is Satoshi Nakamoto? - Investigation & Poll</title>
     <meta name="description" content="Interactive detective board investigating the identity of Bitcoin creator Satoshi Nakamoto. Join the poll and see live results.">
     <meta name="theme-color" content="#1a1a2e">
-      <meta name="google-adsense-account" content="ca-pub-6391217209789426">
     
     <!-- Open Graph -->
     <meta property="og:title" content="Who is Satoshi Nakamoto?">
@@ -23,12 +20,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GQTSQYCDF6"></script></head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-GQTSQYCDF6');
+        gtag('config', 'G-XXXXXXXXXX');
     </script>
     
     <style>
@@ -233,6 +230,22 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
+        }
+
+
+        .candidate-photo-wrap {
+            display: flex;
+            justify-content: center;
+            margin: -4px 0 14px;
+        }
+        .candidate-photo {
+            width: 118px;
+            height: 118px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-gold);
+            background: #fff;
+            box-shadow: 0 4px 18px rgba(0,0,0,.25);
         }
 
         .candidate-card {
@@ -560,6 +573,18 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        .ad-banner {
+            aspect-ratio: 1 / 2;
+            overflow: hidden;
+        }
+        .ad-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
     </style>
 </head>
 <body>
@@ -609,11 +634,9 @@
 
             <div class="sidebar-section">
                 <div class="sidebar-title">📢 Your Ad Here</div>
-                <div class="ad-space-notice">
-                    <strong>Advertise Your Business</strong>
-                    <p>300x600 Banner Space Available</p>
-                    <a href="mailto:ads@whoisatoshi.net">Contact: ads@whoisatoshi.net</a>
-                </div>
+                <a href="#contact" class="ad-banner advertise-placeholder" aria-label="Advertise in the crypto sidebar">
+                    <img src="assets/ads/advertise-crypto-300x600.png" alt="Advertise here - Crypto audience - 300 by 600">
+                </a>
             </div>
 
             <!-- Google Ads Space -->
@@ -717,11 +740,9 @@
 
             <div class="sidebar-section">
                 <div class="sidebar-title">📢 Your Ad Here</div>
-                <div class="ad-space-notice">
-                    <strong>Advertise Here</strong>
-                    <p>300x600 Banner Space Available</p>
-                    <a href="mailto:ads@whoisatoshi.net">Contact: ads@whoisatoshi.net</a>
-                </div>
+                <a href="#contact" class="ad-banner advertise-placeholder" aria-label="Advertise in the forex sidebar">
+                    <img src="assets/ads/advertise-forex-300x600.png" alt="Advertise here - Forex audience - 300 by 600">
+                </a>
             </div>
 
             <!-- Google Ads Space -->
@@ -757,6 +778,7 @@
         const candidates = [
             {
                 id: 'hal-finney',
+                image: 'assets/images/hal-finney-square.webp',
                 name: 'Hal Finney',
                 years: '1956 - 2014',
                 role: 'First Bitcoin TX Receiver',
@@ -774,6 +796,7 @@
             },
             {
                 id: 'nick-szabo',
+                image: 'assets/images/nick-szabo-square.webp',
                 name: 'Nick Szabo',
                 years: 'b. 1964',
                 role: 'Bit Gold Inventor',
@@ -791,6 +814,7 @@
             },
             {
                 id: 'adam-back',
+                image: 'assets/images/adam-back-square.webp',
                 name: 'Adam Back',
                 years: 'b. 1965',
                 role: 'Hashcash / PoW Inventor',
@@ -808,6 +832,7 @@
             },
             {
                 id: 'len-sassaman',
+                image: 'assets/images/len-sassaman-square.webp',
                 name: 'Len Sassaman',
                 years: '1980 - 2011',
                 role: 'PGP Developer',
@@ -847,6 +872,9 @@
             const grid = document.getElementById('candidatesGrid');
             grid.innerHTML = candidates.map(c => `
                 <div class="candidate-card">
+                    <div class="candidate-photo-wrap">
+                        <img class="candidate-photo" src="${c.image}" alt="${c.name}" loading="lazy">
+                    </div>
                     <div class="card-header">
                         <div class="card-name">${c.name}</div>
                         <div class="card-role">${c.role}</div>
