@@ -142,13 +142,10 @@
             padding-bottom: 10px;
         }
 
-     
-            .ad-banner {
-    background: linear-gradient(135deg, #2c2c3e 0%, #16213e 100%);
-    border: none;  ← DÜZELTTIM
-    border-radius: 4px;
-    ...
-}
+        .ad-banner {
+            background: linear-gradient(135deg, #2c2c3e 0%, #16213e 100%);
+            border: 1px dashed var(--border-color);
+            border-radius: 4px;
             min-height: 300px;
             display: flex;
             align-items: center;
@@ -673,76 +670,78 @@ header{background:#fff;border-bottom:5px solid var(--ppt-gold);box-shadow:none;}
         }
 
 
-        /* === Affiliate rails: narrow, frameless, center content untouched === */
+        /* === FINAL FRAMELESS AFFILIATE RAILS === */
         .main-container{
             grid-template-columns:150px minmax(0,1fr) 150px !important;
             gap:14px !important;
-            padding-left:10px !important;
-            padding-right:10px !important;
+            padding-left:8px !important;
+            padding-right:8px !important;
         }
 
-        .sidebar{
-            background:transparent !important;
-            border:0 !important;
-            padding:0 !important;
+        .affiliate-rail{
+            display:flex !important;
+            flex-direction:column !important;
             gap:14px !important;
-            overflow:visible !important;
-        }
-
-        .sidebar-section{
             background:transparent !important;
             border:0 !important;
-            border-radius:0 !important;
             padding:0 !important;
             overflow:visible !important;
+            box-shadow:none !important;
         }
 
-        .sidebar-title{
-            display:none !important;
-        }
-
-        .sidebar .ad-banner{
+        .rail-banner,
+        .rail-placeholder,
+        .rail-sponsored{
+            display:block !important;
             width:100% !important;
-            min-height:0 !important;
-            height:auto !important;
-            aspect-ratio:auto !important;
-            margin:0 0 14px !important;
+            margin:0 !important;
             padding:0 !important;
-            background:transparent !important;
             border:0 !important;
             border-radius:0 !important;
+            background:transparent !important;
             box-shadow:none !important;
             overflow:hidden !important;
+            min-height:0 !important;
+            aspect-ratio:auto !important;
         }
 
-        .sidebar .ad-banner:hover{
+        .rail-banner img,
+        .rail-placeholder img{
+            display:block !important;
+            width:100% !important;
+            height:auto !important;
+            margin:0 !important;
+            padding:0 !important;
+            border:0 !important;
+            border-radius:0 !important;
+            background:transparent !important;
+            object-fit:contain !important;
+        }
+
+        .rail-banner:hover,
+        .rail-placeholder:hover{
             border:0 !important;
             box-shadow:none !important;
             transform:none !important;
         }
 
-        .sidebar .ad-banner img{
-            width:100% !important;
-            height:auto !important;
-            max-width:none !important;
-            object-fit:contain !important;
-            display:block !important;
-            background:transparent !important;
-            border:0 !important;
-            border-radius:0 !important;
+        .rail-text-ad{
+            min-height:240px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            gap:6px;
+            text-align:center;
+            background:#fff;
+            color:#111;
+            font-size:12px;
         }
 
-        .sidebar .ad-space-notice{
-            border:0 !important;
-            border-radius:0 !important;
-            background:transparent !important;
-            box-shadow:none !important;
-            margin:14px 0 !important;
-        }
+        .rail-text-ad strong{font-size:13px;}
+        .rail-sponsored{min-height:120px;}
 
-        .content{
-            min-width:0 !important;
-        }
+        .content{min-width:0 !important;}
 
         @media (max-width:1200px){
             .main-container{
@@ -771,41 +770,26 @@ header{background:#fff;border-bottom:5px solid var(--ppt-gold);box-shadow:none;}
     <!-- MAIN CONTENT -->
     <div class="main-container">
         <!-- LEFT SIDEBAR -->
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <a href="https://www.binance.com/register?ref=35786775" target="_blank" rel="noopener noreferrer sponsored" class="ad-banner binance-affiliate" aria-label="Join Binance">
-                    <img src="assets/ads/binance-banner-vertical-clean.png" alt="Binance - Trade Without Limits">
-                </a>
-                <a href="https://www.gate.io/?ref=XXXXXX" target="_blank" class="ad-banner">
-                    <div style="text-align: center;">
-                        <strong>GATE.IO</strong><br>
-                        Global Crypto Exchange<br>
-                        (300x600)
-                    </div>
-                </a>
-                <a href="https://www.bybit.com/?ref=XXXXXX" target="_blank" class="ad-banner">
-                    <div style="text-align: center;">
-                        <strong>BYBIT</strong><br>
-                        Derivatives Trading<br>
-                        (300x600)
-                    </div>
-                </a>
-            </div>
+        <aside class="sidebar affiliate-rail affiliate-rail-left">
+            <a href="https://www.binance.com/register?ref=35786775"
+               target="_blank"
+               rel="noopener noreferrer sponsored"
+               class="rail-banner"
+               aria-label="Join Binance">
+                <img src="assets/ads/binance-banner-vertical-clean.png" alt="Binance - Trade Without Limits">
+            </a>
 
-            <div class="sidebar-section">
-                <div class="sidebar-title">📢 Your Ad Here</div>
-                <a href="#" onclick="openAdModal(event)" class="ad-banner advertise-placeholder" aria-label="Advertise in the crypto sidebar">
-                    <img src="assets/ads/advertise-crypto-300x600.png" alt="Advertise here - Crypto audience - 300 by 600">
-                </a>
-            </div>
+            <a href="#" onclick="openAdModal(event)" class="rail-placeholder" aria-label="Advertise in the crypto sidebar">
+                <img src="assets/ads/advertise-crypto-300x600.png" alt="Advertise here - Crypto audience">
+            </a>
 
-            <!-- Google Ads Space -->
-            <div class="sidebar-section">
-                <div class="sidebar-title">Sponsored</div>
-                <div class="google-ads-container">
-                    <!-- Google AdSense kod buraya gelecek -->
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXX" data-ad-slot="XXXXX" data-ad-format="vertical" data-full-width-responsive="false"></ins>
-                </div>
+            <div class="rail-sponsored">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-XXXXX"
+                     data-ad-slot="XXXXX"
+                     data-ad-format="vertical"
+                     data-full-width-responsive="false"></ins>
             </div>
         </aside>
 
@@ -1005,45 +989,30 @@ header{background:#fff;border-bottom:5px solid var(--ppt-gold);box-shadow:none;}
         </main>
 
         <!-- RIGHT SIDEBAR -->
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <a href="https://www.pepperstone.com/?partner=XXXXX" target="_blank" class="ad-banner">
-                    <div style="text-align: center;">
-                        <strong>PEPERSTONE</strong><br>
-                        Forex & CFD Trading<br>
-                        (300x600)
-                    </div>
-                </a>
-                <a href="https://www.octafx.com/?ref=XXXXX" target="_blank" class="ad-banner">
-                    <div style="text-align: center;">
-                        <strong>OCTAFX</strong><br>
-                        Trade Global Markets<br>
-                        (300x600)
-                    </div>
-                </a>
-                <a href="https://www.exness.com/?ref=XXXXX" target="_blank" class="ad-banner">
-                    <div style="text-align: center;">
-                        <strong>EXNESS</strong><br>
-                        Professional Forex<br>
-                        (300x600)
-                    </div>
-                </a>
-            </div>
+        <aside class="sidebar affiliate-rail affiliate-rail-right">
+            <a href="https://www.pepperstone.com/?partner=XXXXX" target="_blank" rel="noopener noreferrer sponsored" class="rail-banner">
+                <div class="rail-text-ad"><strong>PEPPERSTONE</strong><span>Forex & CFD Trading</span></div>
+            </a>
 
-            <div class="sidebar-section">
-                <div class="sidebar-title">📢 Your Ad Here</div>
-                <a href="#" onclick="openAdModal(event)" class="ad-banner advertise-placeholder" aria-label="Advertise in the forex sidebar">
-                    <img src="assets/ads/advertise-forex-300x600.png" alt="Advertise here - Forex audience - 300 by 600">
-                </a>
-            </div>
+            <a href="https://www.octafx.com/?ref=XXXXX" target="_blank" rel="noopener noreferrer sponsored" class="rail-banner">
+                <div class="rail-text-ad"><strong>OCTAFX</strong><span>Trade Global Markets</span></div>
+            </a>
 
-            <!-- Google Ads Space -->
-            <div class="sidebar-section">
-                <div class="sidebar-title">Sponsored</div>
-                <div class="google-ads-container">
-                    <!-- Google AdSense kod buraya gelecek -->
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXX" data-ad-slot="XXXXX" data-ad-format="vertical" data-full-width-responsive="false"></ins>
-                </div>
+            <a href="https://www.exness.com/?ref=XXXXX" target="_blank" rel="noopener noreferrer sponsored" class="rail-banner">
+                <div class="rail-text-ad"><strong>EXNESS</strong><span>Professional Forex</span></div>
+            </a>
+
+            <a href="#" onclick="openAdModal(event)" class="rail-placeholder" aria-label="Advertise in the forex sidebar">
+                <img src="assets/ads/advertise-forex-300x600.png" alt="Advertise here - Forex audience">
+            </a>
+
+            <div class="rail-sponsored">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-XXXXX"
+                     data-ad-slot="XXXXX"
+                     data-ad-format="vertical"
+                     data-full-width-responsive="false"></ins>
             </div>
         </aside>
     </div>
