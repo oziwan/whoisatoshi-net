@@ -697,6 +697,53 @@ header{background:#fff;border-bottom:5px solid var(--ppt-gold);box-shadow:none;}
             }
         }
 
+
+        /* Frameless narrow affiliate rails — center investigation content unchanged */
+        .main-container{
+            grid-template-columns:160px minmax(0,1fr) 160px !important;
+            gap:16px !important;
+            padding-left:12px !important;
+            padding-right:12px !important;
+        }
+        .sidebar{
+            background:transparent !important;
+            border:0 !important;
+        }
+        .sidebar-section{
+            background:transparent !important;
+            border:0 !important;
+            border-radius:0 !important;
+            padding:0 !important;
+            overflow:visible !important;
+        }
+        .sidebar .ad-banner{
+            width:100% !important;
+            min-height:0 !important;
+            height:auto !important;
+            aspect-ratio:auto !important;
+            margin:0 0 16px !important;
+            padding:0 !important;
+            background:transparent !important;
+            border:0 !important;
+            border-radius:0 !important;
+            overflow:visible !important;
+        }
+        .sidebar .ad-banner img{
+            width:100% !important;
+            height:auto !important;
+            object-fit:contain !important;
+            display:block !important;
+            background:transparent !important;
+            border:0 !important;
+            border-radius:0 !important;
+        }
+        .content{min-width:0;}
+        @media (max-width:1200px){
+            .main-container{
+                grid-template-columns:140px minmax(0,1fr) 140px !important;
+            }
+        }
+
 </style>
 </head>
 <body>
@@ -721,7 +768,7 @@ header{background:#fff;border-bottom:5px solid var(--ppt-gold);box-shadow:none;}
         <aside class="sidebar">
             <div class="sidebar-section">
                 <a href="https://www.binance.com/register?ref=35786775" target="_blank" rel="noopener noreferrer sponsored" class="ad-banner" aria-label="Join Binance">
-                    <img src="assets/ads/binance-banner.png" alt="Binance - Trade Without Limits">
+                    <img src="assets/ads/binance-banner-vertical.png" alt="Binance - Trade Without Limits">
                 </a>
                 <a href="https://www.gate.io/?ref=XXXXXX" target="_blank" class="ad-banner">
                     <div style="text-align: center;">
