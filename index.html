@@ -750,12 +750,124 @@ header{background:#fff;border-bottom:5px solid var(--ppt-gold);box-shadow:none;}
         }
 
 </style>
+<style id="opal-theme">
+/* Reference layout: one continuous photograph, narrow rails, compact transparent content. */
+:root { --ppt-ink:#f1f1f1; --ppt-paper:transparent; --text-gray:#c7c9ca; }
+html { background:#171b1e; scroll-padding-top:105px; }
+body { font-family:Arial,Helvetica,sans-serif; color:#efefef; background:transparent; isolation:isolate; }
+body::before { content:""; position:fixed; inset:0; z-index:-2; background:#24292e url('assets/images/office-background.png') center/cover no-repeat; pointer-events:none; }
+body::after { content:""; position:fixed; inset:0; z-index:-1; background:rgba(9,12,15,.24); pointer-events:none; }
+button,input,select,textarea,.logo { font-family:Arial,Helvetica,sans-serif; }
+header { padding:8px 0; background:rgba(15,19,23,.6); border-bottom:1px solid #ffffff26; box-shadow:none; backdrop-filter:blur(5px); }
+.header-container { max-width:1460px; gap:24px; }
+.header-brand { font-size:24px; letter-spacing:0; font-weight:400; gap:10px; white-space:nowrap; }
+.header-brand-logo { width:46px; height:46px; flex-basis:46px; }
+.logo,.nav-menu a { color:#efefef; }
+.nav-menu { gap:28px; font-size:12px; text-transform:uppercase; }
+.main-container { display:grid !important; max-width:1480px; grid-template-columns:150px minmax(0,1fr) 160px !important; grid-template-areas:"left main right"; gap:20px !important; align-items:start; min-height:0; padding:12px 12px 0 !important; }
+.main-container>.content { grid-area:main; width:100%; min-width:0 !important; margin:0; padding:0; background:transparent; border:0; border-radius:0; box-shadow:none; }
+.affiliate-rail-left { grid-area:left; }
+.affiliate-rail-right { grid-area:right; }
+.main-container>.affiliate-rail { display:flex !important; flex-direction:column !important; gap:10px !important; position:sticky; top:82px; width:100%; height:auto; max-height:none; padding-top:14px !important; }
+.rail-sponsored:has(ins[data-ad-client="ca-pub-XXXXX"]),.rail-sponsored:has(ins:empty),.rail-sponsored:has(ins[data-ad-status="unfilled"]) { display:none !important; }
+.rail-banner,.rail-placeholder { outline:1px solid #ffffff2b; }
+.rail-text-ad { min-height:200px; padding:18px 10px; color:#f0f0f0; background:linear-gradient(145deg,rgba(13,22,34,.88),rgba(24,30,37,.65)); gap:16px; font-size:13px; }
+.rail-text-ad strong { font-size:17px; }
+.tabs { position:static; display:flex; justify-content:center; gap:24px; padding:0 0 7px; background:transparent; border-bottom:1px solid #ffffff17; }
+.tab-btn { flex:0 1 auto; background:transparent; border:0; border-bottom:2px solid transparent; padding:8px 0; color:#e5e5e5; font-size:11px; letter-spacing:0; }
+.tab-btn.active { background:transparent; color:#e9bb37; border-color:#d4af37; }
+.tab-content { padding:0; }
+.ppt-scroll,.ppt-section { background:transparent; }
+.ppt-section { min-height:0; padding:25px 0 32px; border-bottom:1px solid #ffffff25; }
+.ppt-section::before { display:none; }
+.ppt-hero { min-height:0; padding:10px 0 14px; }
+.ppt-hero .satoshi-hero { width:200px; height:180px; object-fit:cover; object-position:center 35%; margin:0 0 8px; }
+.ppt-hero h1 { font-size:27px; font-weight:500; line-height:1.2; margin:0 0 5px; color:#eee; }
+.ppt-kicker { font-size:17px; color:#d8ad35; margin:0 0 8px; }
+.ppt-rule { height:1px; width:160px; margin:4px auto 7px; }
+.ppt-hero p { color:#d8d8d8; font-size:12px; line-height:1.4; max-width:700px; }
+.ppt-stats { color:#d0ad52; font-size:11px; padding:0; margin:8px 0 0; }
+.ppt-title { display:flex; align-items:center; gap:12px; color:#eee; font-size:20px; line-height:1.3; letter-spacing:0; margin:0 0 10px; }
+.ppt-title::after { content:""; flex:1; height:1px; background:var(--section-color,var(--ppt-gold)); }
+.satoshi-top-card { width:215px; max-width:100%; padding:7px 9px; border-width:1px; border-top-width:4px; gap:10px; margin:0 auto 10px; background:rgba(39,34,21,.5); font-size:12px; line-height:1.2; }
+.satoshi-top-card img { width:56px; height:56px; }
+.candidate-row { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+.ppt-candidate { min-height:0; padding:12px; border-width:1px; border-top-width:5px; background:rgba(22,24,25,.6); }
+.ppt-candidate-head { gap:10px; margin-bottom:10px; align-items:center; }
+.ppt-candidate-head img { width:68px; height:68px; flex-shrink:0; }
+.ppt-candidate-head>div { min-width:0; }
+.ppt-candidate h3 { font-size:14px; line-height:1.2; margin-bottom:5px; }
+.ppt-candidate .role { font-size:12px; line-height:1.25; color:#d6aa30; }
+.ppt-candidate small { font-size:11px; }
+.ppt-candidate h4 { margin:11px 0 5px; font-size:12px; }
+.ppt-candidate p { font-size:12px; line-height:1.28; margin:4px 0; color:#eee; }
+.network-center { background:rgba(42,36,23,.75); }
+.net-card { background:rgba(22,24,25,.68); box-shadow:none; }
+.net-card p,.elim-person p,.metric span { color:#d4d4d4; }
+.craig-panel { background:rgba(46,22,24,.58); }
+.other-elim { background:rgba(22,24,25,.6); }
+.evidence-table tr:nth-child(even) { background:#ffffff09; }
+.evidence-table td { border-color:#ffffff25; }
+.final-section { min-height:0; padding:40px 20px; }
+.final-section h2 { font-size:32px; }
+.sidebar-section,.poll-container,.results-container,.candidate-card,.contact-card { background:rgba(20,24,28,.88); }
+.poll-container,.results-container { margin-top:20px; }
+.poll-option { background:#ffffff08; }
+.contact-card input,.contact-card select,.contact-card textarea { background:#24292f; color:white; }
+footer { margin-top:24px; background:rgba(15,18,21,.7); color:#bbb; }
+.footer-links a,footer p[style] { color:#bbb !important; }
+:focus-visible { outline:2px solid #e3b945; outline-offset:3px; }
+@media (max-width:1250px) {
+  .main-container { grid-template-columns:110px minmax(0,1fr) 110px !important; gap:12px !important; }
+  .ppt-candidate { padding:9px; }
+  .ppt-candidate-head { flex-wrap:wrap; }
+  .rail-text-ad { min-height:160px; font-size:11px; }
+  .rail-text-ad strong { font-size:13px; }
+}
+@media (max-width:900px) {
+  .main-container { grid-template-columns:76px minmax(0,1fr) 76px !important; gap:10px !important; }
+  .candidate-row { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .ppt-candidate-head { flex-wrap:nowrap; }
+  .network-grid { grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:auto; }
+  .net-card { grid-column:auto!important; grid-row:auto!important; flex-wrap:wrap; }
+  .network-center { position:relative; left:auto; top:auto; transform:none; margin:20px auto; max-width:100%; }
+  .network-lines { display:none; }
+  .network { min-height:0; }
+  .elim-grid { grid-template-columns:1fr; gap:20px; }
+  .big-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:600px) {
+  .header-container { flex-direction:column; gap:8px; }
+  .header-brand { font-size:20px; }
+  .nav-menu { gap:14px; font-size:10px; }
+  .main-container { grid-template-columns:40px minmax(0,1fr) 40px !important; gap:6px !important; padding-left:5px !important; padding-right:5px !important; }
+  .main-container>.affiliate-rail { top:115px; gap:8px !important; }
+  .rail-text-ad { padding:8px 2px; min-height:90px; font-size:8px; overflow-wrap:anywhere; }
+  .rail-text-ad strong { font-size:8px; }
+  .candidate-row,.network-grid { grid-template-columns:1fr; }
+  .ppt-hero h1 { font-size:22px; }
+  .ppt-title { font-size:17px; }
+  .tabs { gap:8px; }
+  .tab-btn { font-size:9px; }
+  .ppt-candidate-head { flex-wrap:wrap; }
+  .satoshi-top-card,.network-center { max-width:100%; }
+}
+@media (prefers-reduced-motion:reduce) { * { animation:none!important; transition:none!important; } }
+/* Selected mark and locally bundled Montserrat Light wordmark. */
+@font-face { font-family:'Montserrat'; src:url('assets/fonts/Montserrat-Variable.ttf') format('truetype'); font-style:normal; font-weight:100 900; font-display:swap; }
+.header-brand { font-family:'Montserrat',Arial,sans-serif; font-weight:300; font-synthesis:none; font-size:27px; letter-spacing:0; gap:12px; }
+.header-brand>span { color:#efefef; font-weight:300; }
+.header-brand>span>span { color:#d8ad35 !important; font-weight:300; }
+.header-brand-logo { width:58px; height:58px; flex:0 0 58px; border-radius:0; object-fit:contain; }
+@media(max-width:600px) { .header-brand { font-size:23px; } .header-brand-logo { width:48px; height:48px; flex-basis:48px; } }
+
+</style>
 </head>
 <body>
     <!-- HEADER -->
     <header>
         <div class="header-container">
-            <div class="logo header-brand"><img class="header-brand-logo" src="assets/logo/who-is-satoshi-logo.png" alt="Who Is Satoshi logo"><span>WHO IS <span style="color:#b88711;">SATOSHI</span>?</span></div>
+            <div class="logo header-brand"><img class="header-brand-logo" src="assets/logo/satoshi-magnifier-white.png" alt="Who Is Satoshi logo"><span>Who is <span style="color:#b88711;">Satoshi</span>?</span></div>
             <nav>
                 <ul class="nav-menu">
                     <li><a href="#detective">Detective Board</a></li>
@@ -1131,6 +1243,7 @@ header{background:#fff;border-bottom:5px solid var(--ppt-gold);box-shadow:none;}
         // Load Candidates
         function loadCandidates() {
             const grid = document.getElementById('candidatesGrid');
+            if (!grid) return;
             grid.innerHTML = candidates.map(c => `
                 <div class="candidate-card">
                     <div class="candidate-photo-wrap">
@@ -1202,6 +1315,7 @@ header{background:#fff;border-bottom:5px solid var(--ppt-gold);box-shadow:none;}
             })
             .then(data => {
                 messageDiv.innerHTML = '<div class="poll-success">✓ Vote submitted! Check results →</div>';
+                loadResults();
                 document.querySelector('[data-tab="results"]').click();
             });
         }
@@ -1225,6 +1339,12 @@ header{background:#fff;border-bottom:5px solid var(--ppt-gold);box-shadow:none;}
             });
         }
 
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            const target = link.getAttribute('href').slice(1);
+            const button = document.querySelector('[data-tab="' + target + '"]');
+            if (button) link.addEventListener('click', () => button.click());
+        });
+
         // Load Results
         let pollChart = null;
         function loadResults() {
@@ -1238,6 +1358,13 @@ header{background:#fff;border-bottom:5px solid var(--ppt-gold);box-shadow:none;}
                 'Still Unknown': 1030
             };
 
+            try {
+                const localVotes = JSON.parse(localStorage.getItem('votes') || '{}');
+                Object.keys(mockResults).forEach(name => {
+                    const count = Number(localVotes[name]);
+                    if (Number.isFinite(count) && count > 0) mockResults[name] += count;
+                });
+            } catch (_) { /* Results remain available if storage is unavailable. */ }
             const total = Object.values(mockResults).reduce((a, b) => a + b, 0);
             
             // Tablo Güncelle
@@ -1258,6 +1385,7 @@ header{background:#fff;border-bottom:5px solid var(--ppt-gold);box-shadow:none;}
 
             // Chart Güncelle
             const ctx = document.getElementById('pollChart');
+            if (typeof Chart === 'undefined') return;
             if (pollChart) {
                 pollChart.destroy();
             }
