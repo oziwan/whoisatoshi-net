@@ -1318,6 +1318,29 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
         <!-- RIGHT SIDEBAR -->
         <aside class="sidebar affiliate-rail affiliate-rail-right">
+            <!-- Gate advertisement -->
+            <a class="rail-banner gate-banner" href="https://www.gate.com/referral/earn-together/invite/VFERUF8L?ref=VFERUF8L&amp;ref_type=103&amp;utm_cmp=rXJBDjtJ&amp;activity_id=1791876947985" target="_blank" rel="noopener noreferrer sponsored" aria-label="Join Gate">
+                <img src="gate-banner.png" width="300" height="965" style="height:100% !important; object-fit:contain !important; background:#000615 !important;" alt="Gate — Oracle Red Bull Racing. Claim your token rewards of up to $100!" decoding="async">
+            </a>
+            <script>
+            (() => {
+                const binance = document.querySelector('.affiliate-rail-left .rail-banner img');
+                const gate = document.querySelector('.gate-banner');
+                if (!binance || !gate) return;
+                const matchGateSize = () => {
+                    const { width, height } = binance.getBoundingClientRect();
+                    if (width && height) {
+                        gate.style.setProperty('width', width + 'px', 'important');
+                        gate.style.setProperty('height', height + 'px', 'important');
+                    }
+                };
+                binance.addEventListener('load', matchGateSize);
+                window.addEventListener('resize', matchGateSize);
+                if (window.ResizeObserver) new ResizeObserver(matchGateSize).observe(binance);
+                matchGateSize();
+            })();
+            </script>
+
             <a href="https://www.pepperstone.com/?partner=XXXXX" target="_blank" rel="noopener noreferrer sponsored" class="rail-banner">
                 <div class="rail-text-ad"><strong>PEPPERSTONE</strong><span>Forex & CFD Trading</span></div>
             </a>
