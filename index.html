@@ -769,7 +769,7 @@ header { padding:8px 0; background:rgba(15,19,23,.6); border-bottom:1px solid #f
 .affiliate-rail-left { grid-area:left; }
 .affiliate-rail-right { grid-area:right; }
 .main-container>.affiliate-rail { display:flex !important; flex-direction:column !important; gap:10px !important; position:sticky; top:82px; width:100%; height:auto; max-height:none; padding-top:14px !important; }
-.rail-sponsored:has(ins[data-ad-client="ca-pub-XXXXX"]),.rail-sponsored:has(ins[data-ad-status="unfilled"]) { display:none !important; }
+.rail-sponsored:has(ins[data-ad-status="unfilled"]) { display:none !important; }
 .rail-banner,.rail-placeholder { outline:1px solid #ffffff2b; }
 .rail-text-ad { min-height:200px; padding:18px 10px; color:#f0f0f0; background:linear-gradient(145deg,rgba(13,22,34,.88),rgba(24,30,37,.65)); gap:16px; font-size:13px; }
 .rail-text-ad strong { font-size:17px; }
@@ -1136,10 +1136,10 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
             <div class="rail-sponsored">
                 <ins class="adsbygoogle"
                      style="display:block"
-                     data-ad-client="ca-pub-XXXXX"
-                     data-ad-slot="XXXXX"
-                     data-ad-format="vertical"
-                     data-full-width-responsive="false"></ins>
+                     data-ad-client="ca-pub-6391217209789426"
+                     data-ad-slot="7381614145"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
             </div>
         </aside>
 
@@ -1385,14 +1385,14 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
             })();
             </script>
 
-            <!-- Google AdSense: replace example publisher and slot IDs with your ad unit code. -->
+            <!-- WhoIsSatoshi Sidebar -->
             <div class="rail-sponsored">
                 <ins class="adsbygoogle"
                      style="display:block"
-                     data-ad-client="ca-pub-XXXXX"
-                     data-ad-slot="XXXXX"
-                     data-ad-format="vertical"
-                     data-full-width-responsive="false"></ins>
+                     data-ad-client="ca-pub-6391217209789426"
+                     data-ad-slot="7381614145"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
             </div>
 
             
@@ -1706,10 +1706,14 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         setInterval(loadResults, 10000);
     </script>
 
-    <!-- Google AdSense (replace with your ID) -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXX"></script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6391217209789426" crossorigin="anonymous"></script>
     <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
+        document.querySelectorAll('ins.adsbygoogle').forEach(function (ad) {
+            if (!ad.hasAttribute('data-adsbygoogle-status')) {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            }
+        });
     </script>
 
 <div class="contact-modal" id="adContactModal" aria-hidden="true">
