@@ -4,15 +4,23 @@
     <meta name="google-adsense-account" content="ca-pub-6391217209789426">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Who is Satoshi Nakamoto? - Investigation & Poll</title>
-    <meta name="description" content="Interactive detective board investigating the identity of Bitcoin creator Satoshi Nakamoto. Join the poll and see live results.">
+    <title>Who Is Satoshi Nakamoto? | Candidates &amp; Community Poll</title>
+    <meta name="description" content="Explore the candidates and theories behind Bitcoin creator Satoshi Nakamoto. Compare evidence about Hal Finney, Nick Szabo and others, and join the community poll.">
     <meta name="theme-color" content="#1a1a2e">
+    <link rel="canonical" href="https://whoissatoshi.net/">
+    <meta name="robots" content="index, follow">
+    <meta property="og:site_name" content="Who is Satoshi?">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Who Is Satoshi Nakamoto?">
+    <meta name="twitter:description" content="Explore the candidates and theories behind Bitcoin's creator and join the community poll.">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Who is Satoshi?","url":"https://whoissatoshi.net/","inLanguage":"en","description":"An investigation into the identity of Bitcoin creator Satoshi Nakamoto, with candidate profiles and a community poll."}</script>
+
     
     <!-- Open Graph -->
     <meta property="og:title" content="Who is Satoshi Nakamoto?">
     <meta property="og:description" content="An interactive investigation into Bitcoin's mysterious creator">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://whoisatoshi.net">
+    <meta property="og:url" content="https://whoissatoshi.net/">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Merriweather:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -1517,7 +1525,6 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
             loadCandidates();
             loadPollOptions();
             setupTabs();
-            loadResults();
         });
 
         // Load Candidates
@@ -1639,6 +1646,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
                     });
                     
                     document.getElementById(tab).classList.add('active');
+                    if (tab === 'results') loadResults();
                     this.classList.add('active');
                 });
             });
@@ -1723,8 +1731,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
             } finally { loadingResults = false; }
         }
 
-        // Refresh visible live results once per minute.
-        setInterval(() => { if (!document.hidden && document.getElementById('results').classList.contains('active')) loadResults(); }, 60000);
+        // Results refresh when the results tab is opened or after a vote.
     </script>
 
     <!-- Google AdSense -->
