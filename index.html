@@ -1304,6 +1304,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
                     </div>
 
                     <button class="poll-button" id="submitPoll" onclick="submitPoll()">Cast Your Vote</button>
+                    <p style="font-size:12px;opacity:.8">Anonymous community poll. One vote per browser. Clearing browser data or using another device can bypass this limit. A random browser identifier is stored locally to prevent repeat votes.</p>
                     <div id="pollMessage"></div>
                 </div>
 
@@ -1566,37 +1567,62 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
             element.querySelector('input').checked = true;
         }
 
-        // Submit Poll
-        function submitPoll() {
+        // Real shared poll. The browser ID limits repeat voting, not unique people.
+        let submittingPoll = false;
+        async function pollRequest(url, options = {}) {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 20000);
+            try {
+                const response = await fetch(url, { ...options, cache: 'no-store', signal: controller.signal });
+                const data = await response.json();
+                if (!response.ok || !data.success) {
+                    const error = new Error(data.message || 'The poll is temporarily unavailable. Please try again.');
+                    error.code = data.code;
+                    throw error;
+                }
+                return data;
+            } finally { clearTimeout(timeout); }
+        }
+        async function submitPoll() {
+            if (submittingPoll) return;
             const selected = document.querySelector('.poll-option input:checked');
-            const messageDiv = document.getElementById('pollMessage');
-
-            if (!selected) {
-                messageDiv.innerHTML = '<div style="color: var(--accent-red); padding: 10px; margin-top: 15px;">Please select an option</div>';
+            const message = document.getElementById('pollMessage');
+            const button = document.getElementById('submitPoll');
+            message.setAttribute('role', 'status');
+            if (!selected) { message.textContent = 'Please select an option.'; return; }
+            let voterId;
+            try {
+                voterId = localStorage.getItem('satoshi-poll-voter-v1');
+                if (!voterId) {
+                    voterId = crypto.randomUUID();
+                    localStorage.setItem('satoshi-poll-voter-v1', voterId);
+                }
+            } catch {
+                message.textContent = 'Please allow browser storage before voting. Your vote has not been submitted.';
                 return;
             }
-
-            const candidate = selected.value;
-            
-            // Simüle edilmiş API çağrısı
-            fetch('/api/poll/vote', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ candidate })
-            })
-            .then(res => res.json())
-            .catch(() => {
-                // Offline mode - localstorage'a kaydet
-                const votes = JSON.parse(localStorage.getItem('votes') || '{}');
-                votes[candidate] = (votes[candidate] || 0) + 1;
-                localStorage.setItem('votes', JSON.stringify(votes));
-                return { success: true };
-            })
-            .then(data => {
-                messageDiv.innerHTML = '<div class="poll-success">✓ Vote submitted! Check results →</div>';
-                loadResults();
+            submittingPoll = true;
+            button.disabled = true;
+            message.textContent = 'Saving your vote…';
+            try {
+                await pollRequest('/api/poll/vote', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ candidate: selected.value, voterId })
+                });
+                message.textContent = '✓ Your vote has been saved. Thank you!';
+                message.className = 'poll-success';
+                try { localStorage.setItem('satoshi-poll-voted-v1', 'yes'); } catch (_) {}
+                button.textContent = 'Vote recorded';
                 document.querySelector('[data-tab="results"]').click();
-            });
+                await loadResults();
+            } catch (error) {
+                message.className = '';
+                message.textContent = error.name === 'AbortError' ? 'The request timed out. Please retry; your vote will not be counted twice.' : error.message;
+                if (error.code === 'ALREADY_VOTED') {
+                    button.textContent = 'Vote already recorded';
+                    await loadResults();
+                } else { button.disabled = false; }
+            } finally { submittingPoll = false; }
         }
 
         // Tab Navigation
@@ -1624,32 +1650,22 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
             if (button) link.addEventListener('click', () => button.click());
         });
 
-        // Load Results
+        // Live totals; never substitute example or browser-local votes.
         let pollChart = null;
-        function loadResults() {
-            // Örnek sonuçlar
-            const mockResults = {
-                'Hal Finney': 2450,
-                'Nick Szabo': 2100,
-                'Adam Back': 1950,
-                'Len Sassaman': 850,
-                'A Group (Collective)': 620,
-                'Still Unknown': 1030
-            };
-
-            try {
-                const localVotes = JSON.parse(localStorage.getItem('votes') || '{}');
-                Object.keys(mockResults).forEach(name => {
-                    const count = Number(localVotes[name]);
-                    if (Number.isFinite(count) && count > 0) mockResults[name] += count;
-                });
-            } catch (_) { /* Results remain available if storage is unavailable. */ }
-            const total = Object.values(mockResults).reduce((a, b) => a + b, 0);
-            
-            // Tablo Güncelle
+        let loadingResults = false;
+        async function loadResults() {
+            if (loadingResults) return;
+            loadingResults = true;
             const table = document.getElementById('resultsTable');
-            table.innerHTML = Object.entries(mockResults).map(([name, votes]) => {
-                const percentage = ((votes / total) * 100).toFixed(1);
+            try {
+                const data = await pollRequest('/api/poll/results');
+                if (!data.counts || pollOptions.some(name => !Number.isSafeInteger(data.counts[name]) || data.counts[name] < 0)) throw new Error('Invalid results.');
+                const liveResults = Object.fromEntries(pollOptions.map(name => [name, data.counts[name]]));
+                const total = Object.values(liveResults).reduce((a, b) => a + b, 0);
+            // Tablo Güncelle
+
+            table.innerHTML = Object.entries(liveResults).map(([name, votes]) => {
+                const percentage = (total ? (votes / total) * 100 : 0).toFixed(1);
                 return `
                     <tr>
                         <td><strong>${name}</strong></td>
@@ -1672,9 +1688,9 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
             pollChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: Object.keys(mockResults),
+                    labels: Object.keys(liveResults),
                     datasets: [{
-                        data: Object.values(mockResults),
+                        data: Object.values(liveResults),
                         backgroundColor: [
                             '#d4af37',
                             '#e74c3c',
@@ -1701,10 +1717,14 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
                     }
                 }
             });
+            } catch (_) {
+                table.innerHTML = '<tr><td colspan="4">Live results are unavailable. Please try again shortly.</td></tr>';
+                if (pollChart) { pollChart.destroy(); pollChart = null; }
+            } finally { loadingResults = false; }
         }
 
-        // Auto-refresh results every 10 seconds
-        setInterval(loadResults, 10000);
+        // Refresh visible live results once per minute.
+        setInterval(() => { if (!document.hidden && document.getElementById('results').classList.contains('active')) loadResults(); }, 60000);
     </script>
 
     <!-- Google AdSense -->
